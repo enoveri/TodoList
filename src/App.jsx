@@ -4,15 +4,16 @@ import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-
-  // Load tasks from localStorage on initial render
-  useEffect(() => {
+  // Initialize state with a function to check localStorage first
+  const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
-    if (savedTasks) {
-      setTasks(JSON.parse(savedTasks));
+    if (savedTasks) {     
+        return JSON.parse(savedTasks);  
     }
-  }, []);
+    else{
+      return [];
+    }
+  });
 
   // Save tasks to localStorage whenever tasks change
   useEffect(() => {
