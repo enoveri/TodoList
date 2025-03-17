@@ -1,17 +1,19 @@
-import { useState } from 'react';
+import React, { useState } from "react";
 
 function TaskForm({ addTask }) {
-  const [taskText, setTaskText] = useState('');
+  const [taskText, setTaskText] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask(taskText);
-    setTaskText('');
+    if (taskText.trim()) {
+      addTask(taskText);
+      setTaskText("");
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="mb-6">
-      <div className="flex items-center border-b border-gray-300 py-2">
+      <div className="flex items-center border-b-2 border-indigo-500 py-2">
         <input
           type="text"
           value={taskText}
@@ -21,8 +23,7 @@ function TaskForm({ addTask }) {
         />
         <button
           type="submit"
-          className="flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded transition duration-200"
-          disabled={!taskText.trim()}
+          className="flex-shrink-0 bg-indigo-500 hover:bg-indigo-700 border-indigo-500 hover:border-indigo-700 text-sm border-4 text-white py-1 px-2 rounded"
         >
           Add
         </button>
@@ -31,4 +32,4 @@ function TaskForm({ addTask }) {
   );
 }
 
-export default TaskForm; 
+export default TaskForm;
